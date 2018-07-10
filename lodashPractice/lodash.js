@@ -1,3 +1,4 @@
+var _ = require('lodash')
 var customers = [
   {
     id: 1,
@@ -75,12 +76,34 @@ var customers = [
 // first without using lodash's map (with property argument) method, then with it.
 
 //CODE HERE
+const emailAddresses= customers.map(customer => {
+  const newArray = []
+  newArray.push(customer.email)
 
+  return newArray
+}) 
 
+console.log(emailAddresses)
 
 var inviteList1 = ["Ed", "Fanny", "Mildred", "Alice", "James"];
 var inviteList2 = ["Jake", "Mildred", "Jimmy", "Ed", "Franklin"];
 
+function combinedList(){
+list1 = inviteList1
+for(var i= 0; i<inviteList2.length; i++){
+  if(list1.includes(inviteList2[i])){
+
+  }else{
+    list1.push(inviteList2[i])
+  }
+}return list1
+}
+var emptyArray=[]
+var newList = _.union(inviteList2, inviteList1)
+
+console.log(newList)
+
+console.log(combinedList())
 // Uh oh! We are having a party and two invite lists were created.
 // Create a duplicate-free list of the people we want at the party without lodash's _.union().
 // Then create another list that removes all duplicates using _.union().
@@ -110,6 +133,22 @@ var friendsOfBetty = [
 // Jim and Betty are having a party, but they only want to invite mutual friends.
 // Create an array of mutual friends. First without using lodash.
 // Then using lodash's _.intersection().
+
+function partyList(){
+  var list = []
+  for(var i= 0; i< friendsOfBetty.length; i++){
+    if(friendsOfJim.includes(friendsOfBetty[i])){
+      list.push(friendsOfBetty[i])
+    }
+  }
+  return list
+}
+
+console.log(partyList())
+
+var partyList2 = _.intersection(friendsOfBetty, friendsOfJim)
+
+console.log(partyList2)
 
 var purchases = [
   {
@@ -148,3 +187,27 @@ var purchases = [
 
 // First, group the purchases by company without lodash
 // then do it again using _.groupBy()
+
+
+
+function groupOrders(){
+  var dunder = {'Dunder Mifflin': [] 
+  ,Staples: []}
+
+
+  for(var i = 0; i< purchases.length; i++){
+    if(purchases[i].company == "Dunder Mifflin"){
+      dunder['Dunder Mifflin'].push(purchases[i])
+    }else{
+      dunder.Staples.push(purchases[i])
+    }
+  }
+  return dunder
+}
+
+
+console.log(groupOrders())
+
+var ordersByCompany = _.groupBy(purchases, "company")
+
+console.log(ordersByCompany)

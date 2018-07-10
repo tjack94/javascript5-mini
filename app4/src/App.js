@@ -14,16 +14,19 @@ class App extends Component {
     axios.get('https://joes-autos.herokuapp.com/api/vehicles')
     .then(res => {
       this.setState({
-        cars: res
+        cars: res.data
       })
     })
   }
 
   render() {
+    const carsList= this.state.cars.map((car,index)=>{
+      return <p key={index}> {car.make} {car.model} {car.year}</p>
+    })
     return (
       <div className="App">
-        <button onClick={this.getCars}>Get cars</button>
-        {this.state.cars}
+        <button onClick={()=>this.getCars()}>Get cars</button>
+        {carsList}
       </div>
     );
   }
